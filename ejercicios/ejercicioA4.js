@@ -15,7 +15,15 @@ let pizza = new producto (25, "Una pizza", 4)
 
 peras.comprobacion(15);
 
-function carritos (peras, galletas, pizza) {
+function Catalogo (){
+    this.productos = producto[i];
+    this.add = function (producto, cantidad){
+        
+    }
+}
+
+let catalogo = new Catalogo();
+/*function carritos (peras, galletas, pizza) {
     this.peras = 0;
     this.galletas = 0;
     this.pizza = 0;
@@ -35,4 +43,4 @@ function carritos (peras, galletas, pizza) {
 
 let carrito = new carritos (0,0,0)
 
-carrito.add(15, 2)
+carrito.add(15, 2)*/
