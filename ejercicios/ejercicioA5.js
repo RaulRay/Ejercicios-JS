@@ -30,7 +30,7 @@ function Catalogo (){
             console.log(this.arrayProductos[i]);
     }
 }
-let cata = new Catalogo ();
+let cata = new Catalogo (); 
 cata.add (galletas);
 cata.add (pizza);
 cata.search(20);

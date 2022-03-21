@@ -17,30 +17,20 @@ peras.comprobacion(15);
 
 function Catalogo (){
     this.productos = producto[i];
-    this.add = function (producto, cantidad){
+    this.addProd = function (producto, cantidad){
         
     }
 }
 
 let catalogo = new Catalogo();
-/*function carritos (peras, galletas, pizza) {
-    this.peras = 0;
-    this.galletas = 0;
-    this.pizza = 0;
-    this.empty = function(){
-        this.peras = 0;
-        this.galletas = 0;
-        this.pizza = 0;
-    };
-    this.add = function(codigo, cantidad){
-        if (codigo === producto (codigo)){
-            this.codigo = this.codigo + cantidad
-            console.log(this.peras, this.galletas, this. pizza)
-        }
+
+function Carritos (catalogo) {
+    this.catalogo = catalogo;
+    this.compra = [];
+    this.delete = function (){
+        this.compra = [];
     }
-
+    this.add = function (codigo, cantidad){
+        this.catalogo (validar())
+    }
 }
-
-let carrito = new carritos (0,0,0)
-
-carrito.add(15, 2)*/
