@@ -1,17 +1,26 @@
-const prompt = require("prompt-sync")();
+document.addEventListener("DOMContentLoaded", (evento) => inicio(evento));
 
-let a = Number(prompt("Introduce un número: ")); 
+function inicio(event) {
+  document.getElementById("calcular").addEventListener("click", calcular);
+}
+function calcular() {
+  const operacion = document.getElementById("operacion").value;
+  const num1 = parseInt(document.getElementById("numUno").value);
+  const num2 = parseInt(document.getElementById("numDos").value);
+  window.alert("Resultado: " + zuitch(operacion, num1, num2));
+}
+  function zuitch (operacion, num1, num2) {
+    switch (operacion) {
+      case "suma":
+        return num1 + num2;
+      case "resta":
+        return num1 - num2;
+      case "multiplicacion":
+        return num1 * num2;
+      case "division":
+        return num1 / num2;
+      case "resto":
+        return num1 % num2;
+    }
+  } 
 
-let b = Number(prompt("Introduce otro numero: "));
-
-let c = a + b; 
-let d = a - b; 
-let e = a * b; 
-let f = a / b;
-let g = a % b;  
-
-console.log("la suma es: ", c)
-console.log("la resta es: ", d)
-console.log("la multiplicación es: ", e)
-console.log("la división es: ", f)
-console.log("El resto de la division es: ", g)
