@@ -7,26 +7,32 @@
 //3 6%
 //4 3%*/
 
-const prompt = require("prompt-sync")();
-let categoria = Number(prompt("Define la categoria: "));
-let sueldo = Number(prompt("Define el sueldo actual: "));
+// const prompt = require("prompt-sync")();
+// let categoria = Number(prompt("Define la categoria: "));
+// let sueldo = Number(prompt("Define el sueldo actual: "));
+document.addEventListener ('DOMContentLoaded', evento => inicio(evento));
 
-if (!isNaN(categoria) && !isNaN(sueldo)) {
+function inicio(event) {
+  document.getElementById("enviarCat").addEventListener("click", calcular);
+}
+function calcular (){
+  const incr = [1.15,1.1,1.06,1.03]
+  const sueldo = parseInt(document.getElementById("sueldo").value);
+  const categoria = parseInt(document.getElementById("categoria").value);
+  const nuevo = sueldo * incr[categoria-1];
   switch (categoria) {
     case 1:
-      console.log("El sueldo ahora es", sueldo * 1.15);
+      window.alert(nuevo);
       break;
     case 2:
-      console.log("El sueldo ahora es", sueldo * 1.1);
+      window.alert("El sueldo ahora es" + nuevo);
       break;
     case 3:
-      console.log("El sueldo ahora es", sueldo * 1.06);
+      window.alert("El sueldo ahora es" + nuevo);
       break;
     case 4:
-      console.log("El sueldo ahora es", sueldo * 1.03);
+      window.alert("El sueldo ahora es"+  nuevo);
     default: 
-      console.log("Error, categoria equivocada");
+    window.alert("Error, categoria equivocada");
   }
 }
-
-console.log("Pero que has escrito?")

@@ -1,12 +1,14 @@
-const prompt = require("prompt-sync")();
+document.addEventListener ('DOMContentLoaded', evento => inicio(evento));
 
-let a = Number(prompt("Introduce un número: ")); //Number convierte a numero lo que introduces por la consola (string por defecto)
-
-let b = Number(prompt("Introduce otro numero: "));
-
-let c = a;
-a = b;
-b = c;
-
-console.log("El primer numero ahora es: " + b);
-console.log("El segundo numero ahora es: " + a);
+function inicio(event) {
+  document.getElementById("calcular").addEventListener("click", calcular);
+}
+function calcular() {
+    let a = parseInt(document.getElementById("numUno").value);
+    let b = parseInt(document.getElementById("numDos").value);
+    let c = a;
+    a = b;
+    b = c;
+window.alert("El primer numero ahora es: " + a);
+window.alert("El segundo numero ahora es: " + b);
+}
