@@ -62,22 +62,35 @@ nombre:”producto2”, precio:3.0}];
 • testear que carrito.total() === 0 y carrito.items() === 0*/
 
 class Carrito {
-  constructor() {
-    this.catalogo = new Catalogo();
-    this.listaproducto = [];
+  constructor(catalogo) {
+    this.catalogo = catalogo;
+    this.listaProducto = [];
   }
 
   add(codigo, cantidad) {
-    if (this.catalogo.comprobar(codigo) === true) {
-      this.listaproducto.push(codigo, cantidad);
+    if (this.catalogo.comprobar(codigo) !== undefined) {
+      let i = this.buscar(codigo);
+      if (i !== undefined) {
+        i.cantidad = i.cantidad + cantidad;
+      } else {
+        this.listaProducto.push(new Pedido (this.catalogo.comprobar(codigo), cantidad));
+      }
     }
   }
 
-  delete() {}
+  buscar(codigo) {
+    return this.listaProducto.find((item) => item.producto.codigo === codigo)
+  }
+
+  delete(codigo) {}
 
   update() {}
 
   items() {}
+
+  empty() {
+    this.listaProducto = [];
+  }
 
   up() {}
 
@@ -93,15 +106,19 @@ class Catalogo {
     this.arrayProductos = [];
   }
   comprobar(codigo) {
-    if (!this.arrayProductos.filter((item) => item.codigo === codigo)) {
-      console.log("Cannot find");
-    } else {
-      return true;
-    }
+    return this.arrayProductos.find((item) => item.codigo === codigo)
   }
   add(producto) {
     this.arrayProductos.push(producto);
   }
+  static crear() {
+    // Usamos el static porque la función es una función factoría, 
+    //que no necesita de un objeto para ejecutarse
+    const result = new Catalogo();
+    result.add(new Producto("uno", "pera", 2.0));
+   
+    return result;
+}
 }
 
 class Producto {
@@ -109,26 +126,25 @@ class Producto {
     this.codigo = codigo;
     this.nombre = nombre;
     this.precio = precio;
-    this.cantidad = 0;
   }
 }
 
 class Pedido {
-  constructor() {}
-}
+  constructor(producto, cantidad) {
+    this.producto = producto;
+    this.cantidad = cantidad;
 
-const pera = new Producto(001, "Peras", 2.1);
-const chocolate = new Producto(002, "Chocolate", 4.3);
-const jamon = new Producto(003, "Jamon", 7.1);
-const azucar = new Producto(004, "Azucar", 2.5);
+  }
+}
 
 let cata = new Catalogo();
 
-const cart = new Carrito();
-
-cata.add(pera);
-
-cart.add(001, 2);
+let cart = new Carrito(cata);
 
 
-console.log(cart.listaproducto);
+cata.add("uno");
+
+cart.add("uno", 2);
+
+console.log(cart)
+
