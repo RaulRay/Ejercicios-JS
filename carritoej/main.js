@@ -6,4 +6,4 @@ import ViewCart from "./view.js";
 (function() {
     const app = new ControllerCart(new ModelCart(), new ViewCart())
 }
-)(); // el parentesis final obliga a ejecutarse la funcion
+)();

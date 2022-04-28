@@ -5,16 +5,14 @@ import { Configuration } from "../configuration.js";
    *
    */
  class View {
-    createElement(tag, class1, class2, class3) {
+    createElement(tag, [classes]) {
       const element = document.createElement(tag)
-      if (class1) {
-        element.classList.add(class1)
-      }
-      if (class2) {
-        element.classList.add(class2)
-      }
-      if (class3) {
-        element.classList.add(class3)
+      if (classes instanceof Array) {
+        for (let item of classes) {
+          element.classList.add(item);
+        }
+      } else {
+        element.classList.add(classes);
       }
       return element
     }
@@ -37,9 +35,10 @@ export default class ViewCart extends View {
   }
   /**
    * Muestra el catálogo. Por cada producto llama al método interno que muestra el producto
-   * @param {*} model: modelo de datos que contiene el catálogo
+   * @param {*} products: array de productos a mostrar
    */
-  displayCatalog(model) {
+  displayCatalog(products) {
+    products.forEach(product=>this._createProduct(product));
     
   }
   /**
@@ -47,7 +46,7 @@ export default class ViewCart extends View {
    * @param {} product: producto a mostrar
    */
   _createProduct(product) {
-    const node = this.createElement('div', 'card', 'col-sm-4');
+    const node = this.createElement('div', ['card', 'col-sm-4']);
     // Body
     const nodeCardBody = this.createElement('div', 'card-body');
     // Titulo
@@ -60,7 +59,7 @@ export default class ViewCart extends View {
     const nodePrice = this.createElement('p', 'card-text');
     nodePrice.textContent = `${product.price} €`;
     // Botón
-    const nodeButton = this.createElement('button', 'btn', 'btn-primary');
+    const nodeButton = this.createElement('button', ['btn', 'btn-primary']);
     nodeButton.textContent = '+';
     nodeButton.dataset.item = product.id;
     nodeButton.addEventListener('click', event => {
@@ -76,19 +75,26 @@ export default class ViewCart extends View {
   }
   /**
    * Muestra el carrito 
-   * @param {} model: modelo de datos con el catálogo
+   * @param {} cart: modelo de datos con el catálogo
    */
-  displayCart(model) {
+  displayCart(cart) {
     // Vaciamos todo el html
     this.DOMCart.textContent = '';
-    model.cart.getItems().forEach(item => this._createItem(item));
-    this.DOMTotal.textContent = model.cart.getTotal();
+    cart.getItems().forEach(item => this._createItem(item));
+    this.DOMTotal.textContent = cart.getTotal();
   }
   /**
    * Muestra un item del carrito
    * @param {} item: producto y cantidad
    */
   _createItem(item) {
+    const node = this.createElement("li", "list-group-item");
+    node.textContent = item.units + "x" + item.product.name + "=" + item.getAmount();
+    const nodeButton = this.createElement("button", ["btn", "btn-danger"]);
+    nodeButton.textContent = "X";
+    button.dataset.item = item.product.id;
+    this.DOMCart.appendChild(node);
+    node.appendChild(nodeButton)
   }
   /**
    * Guarda el manejador para añadir un nuevo artículo al carrito
